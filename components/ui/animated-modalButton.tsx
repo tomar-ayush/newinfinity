@@ -22,7 +22,7 @@ export function AnimatedModalButton() {
   ];
 
 
-  const [campaignInfo,setCampaignInfo] = useState({
+  const [campaignInfo, setCampaignInfo] = useState({
     founder: "",
     industry: "",
     purpose: "",
@@ -34,19 +34,19 @@ export function AnimatedModalButton() {
   const { emailsData } = useContext(emailsContext);
 
 
-  const handleOnClick =async ()=>{
-    if(emailsData.length == 0){
+  const handleOnClick = async () => {
+    if (emailsData.length == 0) {
       alert("Please upload Emails")
       return
     }
-    if(campaignInfo.contact =="" || campaignInfo.founder =="" || campaignInfo.industry =="" || campaignInfo.location =="" || campaignInfo.name =="" || campaignInfo.purpose =="" || campaignInfo.website ==""){
+    if (campaignInfo.contact == "" || campaignInfo.founder == "" || campaignInfo.industry == "" || campaignInfo.location == "" || campaignInfo.name == "" || campaignInfo.purpose == "" || campaignInfo.website == "") {
       alert("Please Fill All Fields")
-      return 
+      return
     }
     await fetch("/api/send-mail",
       {
-        method:"POST",
-        body:JSON.stringify({campaignInfo,emails:emailsData})
+        method: "POST",
+        body: JSON.stringify({ campaignInfo, emails: emailsData })
       }
     )
   }
@@ -56,7 +56,7 @@ export function AnimatedModalButton() {
       <Modal>
         <ModalTrigger className="bg-black w-full dark:bg-white dark:text-black text-white flex justify-center group/modal-btn">
           <span className="text-center">
-           Run Campaign
+            Run Campaign
           </span>
         </ModalTrigger>
         <ModalBody>
@@ -69,97 +69,99 @@ export function AnimatedModalButton() {
               🚀
             </h4>
             <div className=" justify-center items-center">
-        <Label className="my-4">
-          Enter about your campaign details
-        </Label>
-        <Input placeholder="Enter Founder Name" 
-        className="w-full my-2"
-        required
-        onChange={
-          (e) => {
-            setCampaignInfo({
-              ...campaignInfo,
-              founder: e.target.value
-            })
-        }}
-        />
-        <Input placeholder="Enter Your Industry"
-        className="w-full my-2"
-        required
-        onChange={
-          (e) => {
-            setCampaignInfo({
-              ...campaignInfo,
-              industry: e.target.value
-            })
-        }}
-        />
-        <div className="flex flex-row">
-        <Input placeholder="Enter Purpose"
-        className="w-[1/3] my-2 mr-6"
-        required
-        onChange={
-          (e) => {
-            setCampaignInfo({
-              ...campaignInfo,
-              purpose: e.target.value
-            })
-        }}
-        />
-        <Input placeholder="Product/Service Name"
-        className="w-[1/3] my-2"
-        required
-        onChange={
-          (e) => {
-            setCampaignInfo({
-              ...campaignInfo,
-              name: e.target.value
-            })}
-        }
-        />
-         <Input placeholder="Contact Number"
-        className="w-[1/3] my-2 ml-2"
-        required
-        onChange={
-          (e) => {
-            setCampaignInfo({
-              ...campaignInfo,
-              contact: e.target.value
-            })
-          }
-        }
-        />
-        </div>
-      
-        <div className="flex flex-row">
-        <Input placeholder="Location"
-        className="w-[1/2] my-2 mr-6"
-        required
-        onChange={
-          (e)=>{
-            setCampaignInfo({
-            ...campaignInfo,
-            location:e.target.value
-            }
-            )
-          }
-        }
-        />
-        <Input placeholder="Website"
-        required
-        className="w-[1/2] my-2"
-        onChange={
-          (e)=>{
-            setCampaignInfo({
-            ...campaignInfo,
-            website:e.target.value
-            }
-            )
-          }
-        }
-        />
-       
-        </div>
+              <Label className="my-4">
+                Enter about your campaign details
+              </Label>
+              <Input placeholder="Enter Founder Name"
+                className="w-full my-2"
+                required
+                onChange={
+                  (e) => {
+                    setCampaignInfo({
+                      ...campaignInfo,
+                      founder: e.target.value
+                    })
+                  }}
+              />
+              <Input placeholder="Enter Your Industry"
+                className="w-full my-2"
+                required
+                onChange={
+                  (e) => {
+                    setCampaignInfo({
+                      ...campaignInfo,
+                      industry: e.target.value
+                    })
+                  }}
+              />
+              <div className="flex flex-row">
+                <Input placeholder="Enter Purpose"
+                  className="w-3/6 my-2 mr-6"
+                  required
+                  onChange={
+                    (e) => {
+                      setCampaignInfo({
+                        ...campaignInfo,
+                        purpose: e.target.value
+                      })
+                    }}
+                />
+                <Input placeholder="Product/Service Name"
+                  className="w-3/6 my-2"
+                  required
+                  onChange={
+                    (e) => {
+                      setCampaignInfo({
+                        ...campaignInfo,
+                        name: e.target.value
+                      })
+                    }
+                  }
+                />
+              </div>
+
+              <Input placeholder="Contact Number"
+                className="w-full my-2 "
+                required
+                onChange={
+                  (e) => {
+                    setCampaignInfo({
+                      ...campaignInfo,
+                      contact: e.target.value
+                    })
+                  }
+                }
+              />
+
+              <div className="flex flex-row">
+                <Input placeholder="Location"
+                  className="w-3/6 my-2 mr-6"
+                  required
+                  onChange={
+                    (e) => {
+                      setCampaignInfo({
+                        ...campaignInfo,
+                        location: e.target.value
+                      }
+                      )
+                    }
+                  }
+                />
+                <Input placeholder="Website"
+                  required
+                  className="w-3/6 my-2"
+                  onChange={
+                    (e) => {
+                      setCampaignInfo({
+                        ...campaignInfo,
+                        website: e.target.value
+                      }
+                      )
+                    }
+                  }
+                />
+
+              </div>
             </div>
             <div className="py-10 flex flex-wrap gap-x-4 gap-y-6 items-start justify-start max-w-sm mx-auto">
               <div className="flex  items-center justify-center">
@@ -171,13 +173,13 @@ export function AnimatedModalButton() {
               <div className="flex items-center justify-center">
                 <ElevatorIcon className="mr-1 text-neutral-700 dark:text-neutral-300 h-4 w-4" />
                 <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-                 1000+ leads
+                  1000+ leads
                 </span>
               </div>
             </div>
           </ModalContent>
           <ProcessLoader
-          handleOnClick={handleOnClick}
+            handleOnClick={handleOnClick}
           />
         </ModalBody>
       </Modal>
