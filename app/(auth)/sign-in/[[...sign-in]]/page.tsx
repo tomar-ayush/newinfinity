@@ -24,13 +24,20 @@ const formSchema = z.object({
 
 export default function MyForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
   // Handle form submission
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit() {
     try {
+      const values = { email, password };
+      console.log("button clicked jdfkasfjadl");
+      console.log("ayush");
+
       const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -52,31 +59,6 @@ export default function MyForm() {
       toast.error(
         "Failed to login. Please check your credentials and try again."
       );
-    }
-  }
-
-  // Handle Sign Up logic (you can adjust it as needed)
-  async function onSignUp(values: z.infer<typeof formSchema>) {
-    try {
-      const response = await fetch("/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-
-      if (!response.ok) {
-        throw new Error("Error during sign-up");
-      }
-
-      const data = await response.json();
-      document.cookie = `token=${data.token}; path=/; HttpOnly;`;
-      toast.success("Sign-up successful!");
-
-      // Redirect to a protected route
-      window.location.href = "/dashboard";
-    } catch (error) {
-      console.error("Sign-up error:", error);
-      toast.error("Failed to sign up. Please try again.");
     }
   }
 
@@ -106,6 +88,11 @@ export default function MyForm() {
                       placeholder="Enter your email"
                       type="email"
                       {...field}
+                      value={email}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        setEmail(e.target.value);
+                      }}
                       className="text-black w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-12 transition duration-300"
                     />
                   </FormControl>
@@ -132,6 +119,11 @@ export default function MyForm() {
                         placeholder="Enter your password"
                         type={showPassword ? "text" : "password"}
                         {...field}
+                        value={password}
+                        onChange={(e) => {
+                          field.onChange(e);
+                          setPassword(e.target.value);
+                        }}
                         className="text-black w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-12 transition duration-300"
                       />
                       <button
@@ -148,7 +140,7 @@ export default function MyForm() {
                     </div>
                   </FormControl>
                   <FormDescription className="text-xs text-gray-500 mt-1 pb-10">
-                    Ensure your password is strong and secure.
+                    Ensure your password is strong and secure. bla bla
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

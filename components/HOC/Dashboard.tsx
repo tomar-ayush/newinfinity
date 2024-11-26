@@ -2,7 +2,6 @@
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utilss";
-import { UserButton } from "@clerk/nextjs";
 import {
   IconBrandTabler,
   IconSettings
@@ -61,7 +60,8 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
                 label: "",
                 href: "#",
                 icon: (
-                 <UserButton afterSignOutUrl='/'/>
+                //  <UserButton afterSignOutUrl='/'/>
+                <p>hi there </p>
                 ),
               }}
             />

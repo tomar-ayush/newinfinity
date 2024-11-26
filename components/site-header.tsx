@@ -6,7 +6,6 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { ny } from '../lib/utils'
 import { Button, buttonVariants } from '../components/ui/button'
-// import { UserButton, useUser } from '@clerk/nextjs';
 
 
 const menuItem = [
