@@ -61,7 +61,7 @@ export default function HeroSection() {
         className="text-sm font-normal tracking-widest uppercase mt-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 1 }}
+        transition={{ delay: 3, duration: 1 }}
       >
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-purple-500">
           The only Co-Founder your business needs.

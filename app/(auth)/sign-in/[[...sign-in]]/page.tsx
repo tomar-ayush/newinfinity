@@ -86,7 +86,7 @@ export default function MyForm() {
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">
           Welcome Back!
         </h2>
-        <p className="text-gray-600 text-center mb-8">
+        <p className="text-gray-600 text-xs text-center mb-8">
           Login or Sign Up to continue.
         </p>
 
@@ -98,7 +98,7 @@ export default function MyForm() {
               name="name_1508167612"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-semibold text-gray-700">
+                  <FormLabel className="text-lg font-semibold text-gray-700">
                     Email
                   </FormLabel>
                   <FormControl>
@@ -123,7 +123,7 @@ export default function MyForm() {
               name="name_9055738434"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-semibold text-gray-700">
+                  <FormLabel className="text-lg font-semibold text-gray-700">
                     Password
                   </FormLabel>
                   <FormControl>
@@ -147,7 +147,7 @@ export default function MyForm() {
                       </button>
                     </div>
                   </FormControl>
-                  <FormDescription className="text-xs text-gray-500 mt-1">
+                  <FormDescription className="text-xs text-gray-500 mt-1 pb-10">
                     Ensure your password is strong and secure.
                   </FormDescription>
                   <FormMessage />
@@ -166,7 +166,7 @@ export default function MyForm() {
               <Button
                 type="button" // change type to 'button' to prevent form submission on sign up button
                 // onClick={form.handleSubmit(onSignUp)}
-                onClick={ () => window.location.href = "/sign-up"}
+                onClick={() => (window.location.href = "/sign-up")}
                 className="w-full bg-indigo-500 text-white py-2 rounded-lg shadow-md hover:bg-indigo-600 focus:ring-2 focus:ring-indigo-300 transition duration-300"
               >
                 Sign Up

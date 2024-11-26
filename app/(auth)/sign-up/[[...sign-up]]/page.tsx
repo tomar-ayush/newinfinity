@@ -51,10 +51,10 @@ export default function SignupForm() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br bg-black">
       <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-8">
-        <h1 className="text-4xl font-bold text-gray-800 text-center mb-4">
+        <h1 className="text-4xl font-bold text-gray-800 text-center mb-3">
           Sign Up
         </h1>
-        <p className="text-gray-600 text-center mb-6">
+        <p className="text-gray-600 text-sm text-center mb-6">
           Create your account and start your journey with us.
         </p>
 
@@ -66,7 +66,7 @@ export default function SignupForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-semibold text-gray-700">
+                  <FormLabel className="text-lg font-semibold text-gray-700">
                     Email
                   </FormLabel>
                   <FormControl>
@@ -91,7 +91,7 @@ export default function SignupForm() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-semibold text-gray-700">
+                  <FormLabel className="text-lg font-semibold text-gray-700">
                     Password
                   </FormLabel>
                   <FormControl>
@@ -129,7 +129,7 @@ export default function SignupForm() {
               name="confirmPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-semibold text-gray-700">
+                  <FormLabel className="text-lg font-semibold text-gray-700">
                     Confirm Password
                   </FormLabel>
                   <FormControl>
@@ -155,7 +155,7 @@ export default function SignupForm() {
                       </button>
                     </div>
                   </FormControl>
-                  <FormDescription className="text-xs text-gray-500 mt-1">
+                  <FormDescription className="text-xs text-gray-500 mt-1 pb-8">
                     Please confirm your password.
                   </FormDescription>
                   <FormMessage />
@@ -173,9 +173,8 @@ export default function SignupForm() {
               </Button>
               <Button
                 type="button"
-                onClick={() => window.location.href="/sign-in"}
+                onClick={() => (window.location.href = "/sign-in")}
                 className="w-full bg-indigo-500 text-white py-2 rounded-lg shadow-md hover:bg-indigo-600 focus:ring-2 focus:ring-indigo-300 transition duration-300"
-
               >
                 Log In
               </Button>
