@@ -35,10 +35,10 @@ export default function MyForm() {
   async function onSubmit() {
     try {
       const values = { email, password };
-      console.log("button clicked jdfkasfjadl");
+      console.log("button clicked");
       console.log("ayush");
 
-      const response = await fetch("/api/auth/login", {
+      const response = await fetch("../../../api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
@@ -49,11 +49,11 @@ export default function MyForm() {
       }
 
       const data = await response.json();
-      document.cookie = `token=${data.token}; path=/; HttpOnly;`;
+      // document.cookie = `token=${data.token}; path=/; HttpOnly;`;
       toast.success("Login successful!");
 
       // Redirect to a protected route
-      window.location.href = "/dashboard";
+      window.location.href = "../../../services/ai-mailer";
     } catch (error) {
       console.error("Login error:", error);
       toast.error(
@@ -140,7 +140,7 @@ export default function MyForm() {
                     </div>
                   </FormControl>
                   <FormDescription className="text-xs text-gray-500 mt-1 pb-10">
-                    Ensure your password is strong and secure. bla bla
+                    Ensure your password is strong and secure.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

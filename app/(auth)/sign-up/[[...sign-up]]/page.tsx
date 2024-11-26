@@ -17,14 +17,19 @@ import {
 import { Input } from "@/components/ui/input";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
-const formSchema = z.object({
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(5, "Password must be at least 5 characters").max(25),
-  confirmPassword: z
-    .string()
-    .min(5, "Password must be at least 5 characters")
-    .max(25),
-});
+const formSchema = z
+  .object({
+    email: z.string().email("Invalid email address"),
+    password: z.string().min(5, "Password must be at least 5 characters").max(25),
+    confirmPassword: z
+      .string()
+      .min(5, "Password must be at least 5 characters")
+      .max(25),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,17 +39,29 @@ export default function SignupForm() {
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const { email, password } = values;
     try {
-      console.log(values);
-      toast(
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      );
+      const response = await fetch("../../api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        toast.success("Account created successfully!");
+        console.log("API Response:", data);
+        window.location.href = "../../../services/ai-mailer";
+      } else {
+        const errorData = await response.json();
+        toast.error(errorData.message || "Failed to register.");
+      }
     } catch (error) {
-      console.error("Form submission error", error);
-      toast.error("Failed to submit the form. Please try again.");
+      console.error("API Error:", error);
+      toast.error("An error occurred while registering. Please try again.");
     }
   }
 

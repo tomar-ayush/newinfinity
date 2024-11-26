@@ -7,88 +7,81 @@ import { useEffect, useState } from 'react'
 import { ny } from '../lib/utils'
 import { Button, buttonVariants } from '../components/ui/button'
 
-
 const menuItem = [
-   {
-      id: 1,
-      label: 'Features',
-      href: '/features',
-   },
-   {
-      id: 2,
-      label: 'Pricing',
-      href: '#',
-   },
-   {
-      id: 3,
-      label: 'Careers',
-      href: '#',
-   },
-   {
-      id: 4,
-      label: 'Contact Us',
-      href: '#',
-   },
+   { id: 1, label: 'Features', href: '/features' },
+   { id: 2, label: 'Pricing', href: '#' },
+   { id: 3, label: 'Careers', href: '#' },
+   { id: 4, label: 'Contact Us', href: '#' },
 ]
 
 export function SiteHeader() {
    const mobilenavbarVariant = {
-      initial: {
-         opacity: 0,
-         scale: 1,
-      },
+      initial: { opacity: 0, scale: 1 },
       animate: {
          scale: 1,
          opacity: 1,
-         transition: {
-            duration: 0.2,
-            ease: 'easeOut',
-         },
+         transition: { duration: 0.2, ease: 'easeOut' },
       },
       exit: {
          opacity: 0,
-         transition: {
-            duration: 0.2,
-            delay: 0.2,
-            ease: 'easeOut',
-         },
+         transition: { duration: 0.2, delay: 0.2, ease: 'easeOut' },
       },
    }
 
    const mobileLinkVar = {
-      initial: {
-         y: '-20px',
-         opacity: 0,
-      },
+      initial: { y: '-20px', opacity: 0 },
       open: {
          y: 0,
          opacity: 1,
-         transition: {
-            duration: 0.3,
-            ease: 'easeOut',
-         },
+         transition: { duration: 0.3, ease: 'easeOut' },
       },
    }
 
    const containerVariants = {
       open: {
-         transition: {
-            staggerChildren: 0.06,
-         },
+         transition: { staggerChildren: 0.06 },
       },
    }
 
    const [hamburgerMenuIsOpen, setHamburgerMenuIsOpen] = useState(false)
-   // const user = useUser();
-   let user: any;
+   const [user, setUser] = useState<boolean>(false)
+   const [isLoading, setIsLoading] = useState(true)
 
+   // Function to verify token on the client side
+   const verifyToken = async () => {
+      try {
+         setIsLoading(true)
+         const response = await fetch('/api/verify-token', {
+            method: 'GET',
+            credentials: 'include',
+         })
+
+         if (response.ok) {
+            const data = await response.json()
+            setUser(data.isValid)
+         } else {
+            setUser(false)
+         }
+      } catch (error) {
+         console.error('Token verification error:', error)
+         setUser(false)
+      } finally {
+         setIsLoading(false)
+      }
+   }
+
+   // Check for authentication 
+   useEffect(() => {
+      verifyToken()
+   }, [])
+
+   // Prevent body scroll when mobile menu is open
    useEffect(() => {
       const html = document.querySelector('html')
-      if (html)
-         html.classList.toggle('overflow-hidden', hamburgerMenuIsOpen)
+      if (html) html.classList.toggle('overflow-hidden', hamburgerMenuIsOpen)
    }, [hamburgerMenuIsOpen])
 
-
+   // Close mobile menu on orientation/resize
    useEffect(() => {
       const closeHamburgerNavigation = () => setHamburgerMenuIsOpen(false)
       window.addEventListener('orientationchange', closeHamburgerNavigation)
@@ -99,6 +92,11 @@ export function SiteHeader() {
          window.removeEventListener('resize', closeHamburgerNavigation)
       }
    }, [setHamburgerMenuIsOpen])
+
+   // Render loading state or content
+   if (isLoading) {
+      return null // or a loading spinner
+   }
 
    return (
       <>
@@ -112,34 +110,29 @@ export function SiteHeader() {
                </div>
 
                <div className="ml-auto flex h-full items-center">
-                  {!user ?
+                  {!user ? (
                      <div>
                         <Link className="mr-6 text-sm" href="/sign-in">
                            Log in
                         </Link>
                         <Link
-                           className={ny(
-                              buttonVariants({ variant: 'secondary' }),
-                              'mr-6 text-sm',
-                           )}
+                           className={ny(buttonVariants({ variant: 'secondary' }), 'mr-6 text-sm')}
                            href="/sign-up"
                         >
                            Sign up
                         </Link>
                      </div>
-
-                     :
-                     <div className='flex gap-3'>
-                        <Link href={'/dashboard/ai-mailer'}>
-                           <Button variant='secondary'>Features</Button>
+                  ) : (
+                     <div className="flex gap-3">
+                        <Link href={'/services/ai-mailer'}>
+                           <Button variant="secondary">Features</Button>
                         </Link>
                      </div>
-
-                  }
+                  )}
                </div>
                <button
                   className="ml-6 md:hidden"
-                  onClick={() => setHamburgerMenuIsOpen(open => !open)}
+                  onClick={() => setHamburgerMenuIsOpen((open) => !open)}
                >
                   <span className="sr-only">Toggle menu</span>
                   {hamburgerMenuIsOpen ? <XIcon /> : <AlignJustify />}
@@ -147,7 +140,8 @@ export function SiteHeader() {
             </div>
          </header>
          <AnimatePresence>
-            <motion.nav
+            {/* Rest of the existing rendering code remains the same */}
+                        <motion.nav
                initial="initial"
                exit="exit"
                variants={mobilenavbarVariant}
@@ -166,7 +160,7 @@ export function SiteHeader() {
 
                   <button
                      className="ml-6 md:hidden"
-                     onClick={() => setHamburgerMenuIsOpen(open => !open)}
+                     onClick={() => setHamburgerMenuIsOpen((open) => !open)}
                   >
                      <span className="sr-only">Toggle menu</span>
                      {hamburgerMenuIsOpen ? <XIcon /> : <AlignJustify />}
@@ -178,15 +172,14 @@ export function SiteHeader() {
                   initial="initial"
                   animate={hamburgerMenuIsOpen ? 'open' : 'exit'}
                >
-                  {menuItem.map(item => (
+                  {menuItem.map((item) => (
                      <motion.li
                         variants={mobileLinkVar}
                         key={item.id}
                         className="border-grey-dark border-b py-0.5 pl-6 md:border-none"
                      >
                         <Link
-                           className={`hover:text-grey flex h-[var(--navigation-height)] w-full items-center text-xl transition-[color,transform] duration-300 md:translate-y-0 md:text-sm md:transition-colors ${hamburgerMenuIsOpen ? '[&_a]:translate-y-0' : ''
-                              }`}
+                           className={`hover:text-grey flex h-[var(--navigation-height)] w-full items-center text-xl transition-[color,transform] duration-300 md:translate-y-0 md:text-sm md:transition-colors ${hamburgerMenuIsOpen ? '[&_a]:translate-y-0' : ''}`}
                            href={item.href}
                         >
                            {item.label}
@@ -195,6 +188,7 @@ export function SiteHeader() {
                   ))}
                </motion.ul>
             </motion.nav>
+
          </AnimatePresence>
       </>
    )
