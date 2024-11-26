@@ -172,8 +172,10 @@ export default function SignupForm() {
                 Create Account
               </Button>
               <Button
-                type="submit"
+                type="button"
+                onClick={() => window.location.href="/sign-in"}
                 className="w-full bg-indigo-500 text-white py-2 rounded-lg shadow-md hover:bg-indigo-600 focus:ring-2 focus:ring-indigo-300 transition duration-300"
+
               >
                 Log In
               </Button>
