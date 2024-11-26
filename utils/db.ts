@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
 
-const mongo_uri = process.env.MONGO_URI 
+const mongo_uri = process.env.MONGO_URI || "mongodb://localhost:27017/infinity";
 
 const connectDB = async()=>{
+    console.log("db connection start");
+    console.log(mongo_uri)
     const connection = await mongoose.connection.readyState;
 
     if(connection === 1){
@@ -17,7 +19,7 @@ const connectDB = async()=>{
 
     try{
         await mongoose.connect(mongo_uri!,{
-            dbName: "cofounderai",
+            dbName: "Infinity",
             bufferCommands: true,
         });
 

@@ -1,21 +1,23 @@
 import { NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
-export function middleware(req) {
-  const token = req.cookies.get("token"); // Token stored in cookies
+const JWT_SECRET = process.env.JWT_SECRET as string;
+
+export function middleware(req: { cookies: { get: (name: string) => string | undefined }; url: string }) {
+  const token = req.cookies.get("token");
 
   if (!token) {
-    return NextResponse.redirect(new URL("/login", req.url)); // Redirect if no token
+    return NextResponse.redirect(new URL("/login", req.url));
   }
 
   try {
-    jwt.verify(token, process.env.JWT_SECRET);
-    return NextResponse.next(); // Proceed to route
-  } catch (err) {
-    return NextResponse.redirect(new URL("/login", req.url)); // Redirect if invalid
+    jwt.verify(token, JWT_SECRET);
+    return NextResponse.next();
+  } catch (error) {
+    return NextResponse.redirect(new URL("/login", req.url));
   }
 }
 
 export const config = {
-  matcher: ["/protected/:path*", "/dashboard/:path*"], // Define protected routes
+  matcher: ["/dashboard/:path*", "/protected/:path*"], // Define protected routes
 };
