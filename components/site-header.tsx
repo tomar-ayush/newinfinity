@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { ny } from '../lib/utils'
 import { Button, buttonVariants } from '../components/ui/button'
-import { UserButton, useUser } from '@clerk/nextjs';
+// import { UserButton, useUser } from '@clerk/nextjs';
 
 
 const menuItem = [
@@ -80,7 +80,8 @@ export function SiteHeader() {
    }
 
    const [hamburgerMenuIsOpen, setHamburgerMenuIsOpen] = useState(false)
-   const user = useUser();
+   // const user = useUser();
+   let user: any;
 
    useEffect(() => {
       const html = document.querySelector('html')
@@ -104,38 +105,37 @@ export function SiteHeader() {
       <>
          <header className="animate-fade-in fixed left-0 top-0 z-50 w-full -translate-y-4 border-b opacity-0 backdrop-blur-md [--animation-delay:600ms]">
             <div className="container flex h-14 items-center justify-between">
-            <div className="shrink-0">
-              <Link href={"/"} className="text-2xl text-white font-bold">
-                Infinty
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-purple-500">AI.</span>
-              </Link>
-            </div>
+               <div className="shrink-0">
+                  <Link href={"/"} className="text-2xl text-white font-bold">
+                     Infinty
+                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-purple-500">AI.</span>
+                  </Link>
+               </div>
 
                <div className="ml-auto flex h-full items-center">
-                { !user?
-                 <div>
-                    <Link className="mr-6 text-sm" href="/sign-in">
-                        Log in
-                     </Link>
-                     <Link
-                        className={ny(
-                           buttonVariants({ variant: 'secondary' }),
-                           'mr-6 text-sm',
-                        )}
-                        href="/sign-up"
-                     >
-                        Sign up
-                     </Link>
-                 </div>
-                  
-                  :
-                  <div className='flex gap-3'>
-                     <UserButton afterSignOutUrl='/'/>
-                     <Link href={'/dashboard/ai-mailer'}>
-                     <Button variant='secondary'>Dashboard</Button>
-                     </Link>
-                  </div>
-                  
+                  {!user ?
+                     <div>
+                        <Link className="mr-6 text-sm" href="/sign-in">
+                           Log in
+                        </Link>
+                        <Link
+                           className={ny(
+                              buttonVariants({ variant: 'secondary' }),
+                              'mr-6 text-sm',
+                           )}
+                           href="/sign-up"
+                        >
+                           Sign up
+                        </Link>
+                     </div>
+
+                     :
+                     <div className='flex gap-3'>
+                        <Link href={'/dashboard/ai-mailer'}>
+                           <Button variant='secondary'>Features</Button>
+                        </Link>
+                     </div>
+
                   }
                </div>
                <button

@@ -5,7 +5,6 @@ import { Toaster } from '../components/ui/sonner'
 import { ny } from '../lib/utils'
 import '../app/styles/globals.css'
 import { EmailsContextProvider } from '@/context/emailsContext'
-import { ClerkProvider } from '@clerk/nextjs'
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -22,7 +21,6 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ClerkProvider>
 
     <html lang="en" suppressHydrationWarning>
       <body
@@ -41,6 +39,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-    </ClerkProvider>
   )
 }
