@@ -14,11 +14,12 @@ import { useState } from "react";
 
 export default function Dashboard({ children }: { children: React.ReactNode }) {
   const links = [
+
     {
-      label: "AI WebBot",
-      href: '/services/ai-webbot',
+      label: "Dashboard",
+      href: "/services/dashboard",
       icon: (
-        <IconBrandTabler className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <BotMessageSquareIcon className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
@@ -29,17 +30,17 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
       ),
     },
     {
+      label: "AI WebBot",
+      href: '/services/ai-webbot',
+      icon: (
+        <IconBrandTabler className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+      ),
+    },
+    {
       label: "Settings",
       href: "#",
       icon: (
         <IconSettings className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-      ),
-    },
-    {
-      label: "User Dashboard",
-      href: "/services/dasboard",
-      icon: (
-        <BotMessageSquareIcon className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
   ];
