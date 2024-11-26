@@ -1,25 +1,14 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import google from "@/app/ai/main"; // Assuming this is your AI integration
-import { generateText } from "ai"; // Adjust this to the specific AI function you're using
+import google from "@/app/ai/main";
+import { generateText } from "ai"; 
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from 'nodemailer'; // For sending emails
+import nodemailer from 'nodemailer'; 
 
 export async function POST(req: NextRequest) {
   try {
     // Step 1: Parse request body for emails, companyInfo, and writer details
     const { emails, campaignInfo } = await req.json(); 
-
-    // Fallback static company info in case it's not provided in the request
-    // const campaignInfo = companyInfo || {
-    //   founder: "Elon Musk",
-    //   industry: "Software Development",
-    //   purpose: "Promoting App Development",
-    //   name: "Musk Softwares",
-    //   location: "Rajpura",
-    //   website: "https://www.chitkara.edu.in",
-    //   contact: "+91 9816328430"
-    // };
 
     // Step 2: Set up the email transporter with nodemailer
     const transporter = nodemailer.createTransport({

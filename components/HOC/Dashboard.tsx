@@ -69,7 +69,8 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
                 href: "#",
                 icon: (
                   //  <UserButton afterSignOutUrl='/'/>
-                  <p>hi there </p>
+                  // <p>hi there </p>
+                  <Profile />
                 ),
               }}
             />
@@ -120,5 +121,25 @@ export const LogoIcon = () => {
     </Link>
   );
 };
+
+export const Profile = () => {
+  return (
+    <Link
+      href="#"
+      className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
+    >
+      <div
+        className="flex items-center justify-center rounded-full bg-blue-500 text-white font-bold"
+        style={{
+          width: 30,
+          height: 30,
+          fontSize: 30 / 2, // Adjust font size based on circle size
+        }}
+      >
+        U
+      </div>
+    </Link>
+  )
+}
 
 

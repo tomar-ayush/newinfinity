@@ -20,8 +20,6 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 const formSchema = z
   .object({
-    firstName: z.string().min(1, "First name is required"),
-    lastName: z.string().min(1, "Last name is required"),
     email: z.string().email("Invalid email address"),
     password: z.string().min(5, "Password must be at least 5 characters").max(25),
     confirmPassword: z
@@ -43,22 +41,21 @@ export default function SignupForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const { firstName, lastName, email, password } = values;
-    console.log(values)
+    const { email, password } = values;
     try {
-      const response = await fetch("../../../api/auth/register", {
+      const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ firstName, lastName, email, password }),
+        body: JSON.stringify({ email, password }),
       });
 
       if (response.ok) {
         const data = await response.json();
         toast.success("Account created successfully!");
         console.log("API Response:", data);
-        window.location.href = "../../../services/ai-mailer";
+        window.location.href = "/services/ai-mailer";
       } else {
         const errorData = await response.json();
         toast.error(errorData.message || "Failed to register.");
@@ -81,51 +78,6 @@ export default function SignupForm() {
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            {/* First Name Field */}
-            <div className="flex gap-5 ">
-
-            <FormField
-              control={form.control}
-              name="firstName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-lg font-semibold text-gray-700">
-                    First Name
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter your first name"
-                      {...field}
-                      className="text-black w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-300"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {/* Last Name Field */}
-            <FormField
-              control={form.control}
-              name="lastName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-lg font-semibold text-gray-700">
-                    Last Name
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter your last name"
-                      {...field}
-                      className="text-black w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-300"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            </div>
-
             {/* Email Field */}
             <FormField
               control={form.control}

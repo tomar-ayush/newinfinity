@@ -6,8 +6,8 @@ import User from "../../../../models/User";
 export async function POST(req: Request) {
   try {
     // Parse the request body
-    const { email, password } = await req.json();
-
+    const { firstName, lastName, email, password } = await req.json();
+    console.log(firstName, lastName, email, password )
     // Check if required fields are present
     if (!email || !password) {
       return NextResponse.json(
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     }
 
     // Create and save the user
-    const user = new User({ email, password: hashedPassword });
+    const user = new User({ name: firstName + " " + lastName, email, password: hashedPassword });
     await user.save();
 
     // Respond with success
