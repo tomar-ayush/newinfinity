@@ -1,20 +1,22 @@
 import { NextResponse } from "next/server";
-import { otpStorage } from "@/lib/otpStorage"; // Adjust import path as needed
+import Otp from "../../../../models/otpModel.ts"
 
 export async function POST(req) {
   const { email, otp } = await req.json();
-  const storedOtp = otpStorage.get(email);
   
-  if (!storedOtp || storedOtp.expires < Date.now()) {
+  // Fetch the latest OTP from the database for the given email
+  const storedOtp = await Otp.find({ email }).sort({ createdAt: -1 }).limit(1);
+  console.log(storedOtp);
+
+  // If no OTP is found or OTP has expired
+  if (!storedOtp ) {
     return NextResponse.json({ error: "OTP expired or invalid" }, { status: 400 });
   }
-  
-  if (storedOtp.otp !== otp) {
+
+  // Compare the OTP with the one sent
+  if (storedOtp[0].otp !== otp) {
     return NextResponse.json({ error: "Incorrect OTP" }, { status: 400 });
   }
-  
-  // Clear OTP after successful verification
-  otpStorage.delete(email);
-  
-  return NextResponse.json({ message: "OTP verified successfully" });
+
+  return NextResponse.json({ message: "OTP verified successfully" }, {status: 200});
 }

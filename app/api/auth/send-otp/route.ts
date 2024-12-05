@@ -1,13 +1,13 @@
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
-import { otpStorage } from "@/lib/otpStorage"; // Adjust import path as needed
+import Otp from "../../../../models/otpModel.ts"
 
 export async function POST(req) {
   const { email } = await req.json();
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
   
-  // Store OTP with an expiry time
-  otpStorage.set(email, { otp, expires: Date.now() + 5 * 60 * 1000 });
+  const otp_obj = new Otp({email, otp, createdAt: Date.now()});
+  await otp_obj.save();
   
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
@@ -28,3 +28,5 @@ export async function POST(req) {
   
   return NextResponse.json({ message: "OTP sent successfully" });
 }
+
+

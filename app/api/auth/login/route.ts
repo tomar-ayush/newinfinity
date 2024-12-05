@@ -4,10 +4,18 @@ import { NextResponse } from "next/server";
 import connectToDatabase from "../../../../lib/mongodb";
 import User from "../../../../models/User";
 
-const JWT_SECRET = process.env.JWT_SECRET as string;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export async function POST(req: Request) {
   try {
+    // Ensure JWT_SECRET is defined
+    if (!JWT_SECRET) {
+      return NextResponse.json(
+        { error: "JWT_SECRET is not defined in environment variables" },
+        { status: 500 }
+      );
+    }
+
     // Parse the request body
     const body = await req.json();
     const { email, password } = body;
@@ -42,11 +50,20 @@ export async function POST(req: Request) {
     }
 
     // Generate JWT token
-    const token = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ email: user.email, userId: user._id }, JWT_SECRET, { expiresIn: "1h" });
 
-    // Set token as HttpOnly cookie
+    // Set cookie with token
     const headers = new Headers();
-    headers.set("Set-Cookie", `token=${token}; HttpOnly; Path=/; Max-Age=3600`);
+    headers.set(
+      "Set-Cookie",
+      `token=${token}; HttpOnly; Path=/; Max-Age=3600; Secure; SameSite=Lax`
+    );
+    
+
+    {/* const header = await fetch("http://localhost:3000/api/auth/set-cookie", { */}
+    {/*   method: "POST", */}
+    {/*   headers: { "Content-Type": "application/json" }, */}
+    {/* }) */}
 
     return NextResponse.json(
       { message: "Login successful" },

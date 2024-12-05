@@ -16,13 +16,10 @@ export async function POST(req: Request) {
       );
     }
 
-    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Connect to the database
     await connectToDatabase();
 
-    // Check if the user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return NextResponse.json(
@@ -34,6 +31,14 @@ export async function POST(req: Request) {
     // Create and save the user
     const user = new User({ name: firstName + " " + lastName, email, password: hashedPassword });
     await user.save();
+
+    
+    // Setting Cookies
+    const headers = new Headers();
+    headers.set(
+      "Set-Cookie",
+      `token=${token}; HttpOnly; Path=/; Max-Age=3600; Secure; SameSite=Lax`
+    );
 
     // Respond with success
     return NextResponse.json({ message: "User registered successfully" });
