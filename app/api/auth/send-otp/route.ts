@@ -1,11 +1,13 @@
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
 import Otp from "../../../../models/otpModel.ts"
+import connectDb from "../../../../lib/mongodb.ts"
 
 export async function POST(req) {
   const { email } = await req.json();
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
   
+  connectDb();
   const otp_obj = new Otp({email, otp, createdAt: Date.now()});
   await otp_obj.save();
   
@@ -26,7 +28,6 @@ export async function POST(req) {
     text: `Your OTP is ${otp}`,
   });
   
+  
   return NextResponse.json({ message: "OTP sent successfully" });
 }
-
-

@@ -1,6 +1,6 @@
 import google from "@/app/ai/main";
 import website from "@/models/website";
-import connectDB from "@/utils/db";
+import connectDB from "../../../utils/db";
 import { generateText } from "ai";
 import { NextRequest, NextResponse } from "next/server";
 

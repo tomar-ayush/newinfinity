@@ -1,6 +1,6 @@
 import mongoose, { ConnectOptions } from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI as string || "mongodb://localhost:27017/infinity" ;
+const MONGODB_URI= process.env.MONGODB_URI ;
 
 if (!MONGODB_URI) {
   throw new Error("Please define the MONGODB_URI environment variable");
@@ -13,6 +13,7 @@ if (!cached) {
 }
 
 async function connectToDatabase(): Promise<typeof mongoose> {
+  console.log("Db Connections: "+  MONGODB_URI);
   if (cached.conn) {
     return cached.conn;
   }
