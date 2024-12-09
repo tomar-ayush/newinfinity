@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utilss";
-import { IconBrandTabler, IconSettings } from "@tabler/icons-react";
+import { IconBrandTabler, IconSettings, IconLogout } from "@tabler/icons-react";
 import { BotMessageSquareIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -38,7 +38,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
     {
       label: "Logout",
       href: "/services/logout",
-      icon: <IconSettings className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />,
+      icon: <IconLogout className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />,
     },
   ];
 
