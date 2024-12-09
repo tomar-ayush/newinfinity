@@ -26,13 +26,15 @@ export default function UsersPage() {
 	const fetchUsers = useCallback(async () => {
 		try {
 			setLoading(true);
-			const response = await fetch('/api/users');
+			const response = await fetch('http://localhost:3000/api/user');
+			{/* console.log("The promise is " + await response.json()) */ }
 
 			if (!response.ok) {
 				throw new Error('Failed to fetch users');
 			}
 
 			const data: User[] = await response.json();
+			console.log("The promise is " + data)
 			setUsers(data);
 			setError(null);
 		} catch (error) {
