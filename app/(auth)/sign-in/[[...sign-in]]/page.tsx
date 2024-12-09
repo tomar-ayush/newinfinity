@@ -19,7 +19,16 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 const formSchema = z.object({
   name_1508167612: z.string().email("Please enter a valid email"),
-  name_9055738434: z.string().min(6, "Password must be at least 6 characters"),
+  name_9055738434: z
+    .string()
+    .min(8, "Password must be at least 8 characters long")
+    .regex(/[A-Z]/, "Password must include at least one uppercase letter")
+    .regex(/[a-z]/, "Password must include at least one lowercase letter")
+    .regex(/\d/, "Password must include at least one number")
+    .regex(
+      /[@$!%*?&]/,
+      "Password must include at least one special character (@, $, !, %, *, ?, &)"
+    ),
 });
 
 export default function MyForm() {
