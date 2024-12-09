@@ -7,7 +7,8 @@ export async function GET() {
 		await dbConnect();
 		console.log("The GET route was called");
 
-		const users = await User.find();
+		// Exclude the 'password' field
+		const users = await User.find().select('-password');
 
 		return NextResponse.json(users, { status: 200 });
 	} catch (error) {

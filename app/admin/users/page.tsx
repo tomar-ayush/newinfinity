@@ -36,15 +36,21 @@ export default function UsersPage() {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [showPopup, setShowPopup] = useState(false);
 
-  // Fetch users
+  // Optimize fetch with useCallback to prevent unnecessary re-renders
   const fetchUsers = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3000/api/user");
+      const response = await fetch("http://localhost:3000/api/user/getUsers");
+      {
+        /* console.log("The promise is " + await response.json()) */
+      }
+
       if (!response.ok) {
         throw new Error("Failed to fetch users");
       }
+
       const data: User[] = await response.json();
+      console.log("The promise is " + data);
       setUsers(data);
       setError(null);
     } catch (error) {
