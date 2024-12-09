@@ -5,6 +5,7 @@ import { Toaster } from '../components/ui/sonner'
 import { ny } from '../lib/utils'
 import '../app/styles/globals.css'
 import { EmailsContextProvider } from '@/context/emailsContext'
+import ChatbotLayout from '@/components/chatbot/chatbot-layout'
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -29,6 +30,7 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
+        <ChatbotLayout>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -37,6 +39,7 @@ export default function RootLayout({
           <EmailsContextProvider>{children}</EmailsContextProvider>
           <Toaster />
         </ThemeProvider>
+        </ChatbotLayout>
       </body>
     </html>
   )
