@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     }
 
     // Create and save the user
-    const user = new User({ name: firstName + " " + lastName, email, password: hashedPassword });
+    const user = new User({ name: firstName + " " + lastName, email, password: hashedPassword, role: "user" });
     await user.save();
 
     // Generate JWT token
