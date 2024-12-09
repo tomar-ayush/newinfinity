@@ -1,4 +1,3 @@
-// app/admin/dashboard/page.tsx
 import React from 'react';
 import SystemStats from '@/components/admin/SystemStats';
 import UserActivityChart from '@/components/admin/UserActivityChart';
