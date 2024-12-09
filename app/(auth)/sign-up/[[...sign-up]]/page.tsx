@@ -20,15 +20,30 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 const formSchema = z
   .object({
-    firstName: z.string().min(1, "First name is required"),
-    lastName: z.string().min(1, "Last name is required"),
+    firstName: z
+      .string()
+      .min(1, "First name is required")
+      .regex(/^[A-Za-z]+$/, "First name must contain only alphabets"),
+    lastName: z
+      .string()
+      .min(1, "Last name is required")
+      .regex(/^[A-Za-z]+$/, "Last name must contain only alphabets"),
     email: z.string().email("Invalid email address"),
     otp: z.string().length(6, "OTP must be 6 digits"),
-    password: z.string().min(5, "Password must be at least 5 characters").max(25),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .max(25, "Password must be at most 25 characters")
+      .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+      .regex(/[0-9]/, "Password must contain at least one digit")
+      .regex(
+        /[!@#$%^&*(),.?":{}|<>]/,
+        "Password must contain at least one special character"
+      ),
     confirmPassword: z
       .string()
-      .min(5, "Password must be at least 5 characters")
-      .max(25),
+      .min(8, "Password must be at least 8 characters"),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
@@ -46,7 +61,7 @@ export default function SignupForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       otp: "",
-    }
+    },
   });
 
   async function sendOtp() {
@@ -347,9 +362,10 @@ export default function SignupForm() {
                 type="submit"
                 disabled={!isOtpVerified}
                 className={`w-full text-white py-2 rounded-lg shadow-md transition duration-300 
-                  ${!isOtpVerified
-                    ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-indigo-500 hover:bg-indigo-600 focus:ring-2 focus:ring-indigo-300'
+                  ${
+                    !isOtpVerified
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-indigo-500 hover:bg-indigo-600 focus:ring-2 focus:ring-indigo-300"
                   }`}
               >
                 Create Account
