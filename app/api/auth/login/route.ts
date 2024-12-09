@@ -50,7 +50,11 @@ export async function POST(req: Request) {
     }
 
     // Generate JWT token
-    const token = jwt.sign({ email: user.email, userId: user._id }, JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign(
+      { email: user.email, userId: user._id, role: user.role },
+      JWT_SECRET,
+      { expiresIn: "1h" }
+    );
 
     // Set cookie with token
     const headers = new Headers();
@@ -58,12 +62,12 @@ export async function POST(req: Request) {
       "Set-Cookie",
       `token=${token}; HttpOnly; Path=/; Max-Age=3600; Secure; SameSite=Lax`
     );
-    
 
-    {/* const header = await fetch("http://localhost:3000/api/auth/set-cookie", { */}
-    {/*   method: "POST", */}
-    {/*   headers: { "Content-Type": "application/json" }, */}
-    {/* }) */}
+
+    {/* const header = await fetch("http://localhost:3000/api/auth/set-cookie", { */ }
+    {/*   method: "POST", */ }
+    {/*   headers: { "Content-Type": "application/json" }, */ }
+    {/* }) */ }
 
     return NextResponse.json(
       { message: "Login successful" },

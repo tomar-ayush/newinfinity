@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
-import { ThemeProvider } from '../components/theme-provider'
 import { Toaster } from '../components/ui/sonner'
 import { ny } from '../lib/utils'
 import '../app/styles/globals.css'
@@ -31,14 +30,8 @@ export default function RootLayout({
         )}
       >
         <ChatbotLayout>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          disableTransitionOnChange
-        >
           <EmailsContextProvider>{children}</EmailsContextProvider>
           <Toaster />
-        </ThemeProvider>
         </ChatbotLayout>
       </body>
     </html>

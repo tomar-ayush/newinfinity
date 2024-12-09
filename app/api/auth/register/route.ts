@@ -8,6 +8,13 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 export async function POST(req: Request) {
   try {
+
+    if (!JWT_SECRET) {
+      return NextResponse.json(
+        { error: "JWT_SECRET is not defined in environment variables" },
+        { status: 500 }
+      );
+    }
     // Parse the request body
     const { firstName, lastName, email, password } = await req.json();
 
@@ -38,7 +45,11 @@ export async function POST(req: Request) {
     await user.save();
 
     // Generate JWT token
-    const token = jwt.sign({ email: user.email, userId: user._id }, JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign(
+      { email: user.email, userId: user._id, role: user.role },
+      JWT_SECRET,
+      { expiresIn: "1h" }
+    );
 
     // Set the token in a cookie
     const headers = new Headers();
