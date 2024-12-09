@@ -8,7 +8,7 @@ const Hero = () => {
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div className="shrink-0">
-              <Link href={"/"} className="text-2xl text-white font-bold">
+              <Link href={"/"} className="text-2xl text-black dark:text-white  font-bold">
                Infinity
                 <span className="text-blue-500">AI</span>
               </Link>
