@@ -26,7 +26,7 @@ export default function UsersPage() {
 	const fetchUsers = useCallback(async () => {
 		try {
 			setLoading(true);
-			const response = await fetch('http://localhost:3000/api/user');
+			const response = await fetch('http://localhost:3000/api/user/getUsers');
 			{/* console.log("The promise is " + await response.json()) */ }
 
 			if (!response.ok) {
