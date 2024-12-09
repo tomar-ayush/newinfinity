@@ -18,32 +18,46 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
     {
       label: "Dashboard",
       href: "/services/dashboard",
-      icon: <BotMessageSquareIcon className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+      icon: (
+        <BotMessageSquareIcon className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+      ),
     },
     {
       label: "AI Mailer",
       href: "/services/ai-mailer",
-      icon: <BotMessageSquareIcon className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+      icon: (
+        <BotMessageSquareIcon className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+      ),
     },
     {
       label: "AI WebBot",
       href: "/services/ai-webbot",
-      icon: <IconBrandTabler className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+      icon: (
+        <IconBrandTabler className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+      ),
     },
     {
       label: "Settings",
       href: "#",
-      icon: <IconSettings className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+      icon: (
+        <IconSettings className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+      ),
     },
     {
       label: "Logout",
       href: "/services/logout",
-      icon: <IconLogout className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />,
+      icon: (
+        <IconLogout className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+      ),
     },
   ];
 
   return (
-    <div className={cn("flex h-screen overflow-hidden bg-gray-100 dark:bg-neutral-800")}>
+    <div
+      className={cn(
+        "flex h-screen overflow-hidden bg-gray-100 dark:bg-neutral-800"
+      )}
+    >
       {/* Sidebar */}
       <Sidebar open={open} setOpen={setOpen}>
         <SidebarBody className="flex flex-col gap-10 justify-between">
@@ -59,7 +73,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
           <SidebarLink
             link={{
               label: "",
-              href: "#",
+              href: "/services/profile",
               icon: <Profile />,
             }}
           />
@@ -82,9 +96,14 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
 
 // Logo Component
 const Logo = () => (
-  <Link href="/" className="flex items-center text-2xl font-bold text-black dark:text-white">
+  <Link
+    href="/"
+    className="flex items-center text-2xl font-bold text-black dark:text-white"
+  >
     <div className="h-5 w-6 bg-black dark:bg-white rounded-lg flex-shrink-0" />
-    <span className="ml-2">Infinity<span className="text-blue-500">AI</span></span>
+    <span className="ml-2">
+      Infinity<span className="text-blue-500">AI</span>
+    </span>
   </Link>
 );
 

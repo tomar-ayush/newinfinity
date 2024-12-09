@@ -1,14 +1,12 @@
-import Dashboard from '@/components/HOC/Dashboard'
-import React from 'react'
+import Dashboard from "@/components/HOC/Dashboard";
+import React from "react";
 
 const page = () => {
   return (
     <div>
-        <Dashboard>
-            Dashboard
-        </Dashboard>
+      <Dashboard>loading ...</Dashboard>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
