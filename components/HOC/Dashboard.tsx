@@ -1,13 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utilss";
-import { IconBrandTabler, IconSettings, IconLogout } from "@tabler/icons-react";
+import { IconBrandTabler, IconLogout, IconSettings } from "@tabler/icons-react";
 import { BotMessageSquareIcon } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 // Dashboard Component
 export default function Dashboard({ children }: { children: React.ReactNode }) {

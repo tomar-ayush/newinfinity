@@ -32,7 +32,7 @@ const TooltipArrow = TooltipPrimitive.TooltipArrow
 
 export interface TooltipProps
    extends React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>,
-   VariantProps<typeof tooltipVariants> {};
+   VariantProps<typeof tooltipVariants> {}
 
 const TooltipContent = React.forwardRef<
    React.ElementRef<typeof TooltipPrimitive.Content>,

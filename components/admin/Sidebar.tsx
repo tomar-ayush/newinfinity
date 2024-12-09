@@ -1,16 +1,14 @@
 "use client"
 
-import React from 'react';
+import {
+  Bell,
+  LayoutDashboard,
+  Settings,
+  Users
+} from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import {
-  Users,
-  Settings,
-  Activity,
-  Server,
-  Bell,
-  LayoutDashboard
-} from 'lucide-react';
+import React from 'react';
 
 const SIDEBAR_ITEMS = [
   {

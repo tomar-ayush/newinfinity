@@ -2,8 +2,17 @@
 
 import { useEffect, useState } from 'react';
 
+interface WebsiteContent {
+    hero: string;
+    feature: string;
+    contact: string;
+    email: string;
+    location: string;
+}
+
 const Page = ({ params }: { params: { startup: string } }) => {
-    const [websiteContent, setWebsiteContent] = useState<any | object>(null);
+    
+    const [websiteContent, setWebsiteContent] = useState<WebsiteContent>();
 
     useEffect(() => {
         const fetchData = async () => {

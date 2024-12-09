@@ -37,6 +37,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
    const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false)
 
    async function onSubmit(_data: FormData) {
+      console.log(_data)
       setIsLoading(true)
 
       // TODO: Add signin using preferred provider

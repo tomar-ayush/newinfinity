@@ -55,7 +55,12 @@ const tiles = [
    },
 ]
 
-function shuffleArray(array: any[]) {
+interface arrayTypes{
+   icon: JSX.Element
+   bg: JSX.Element
+}
+
+function shuffleArray(array: arrayTypes[]) {
    let currentIndex = array.length
    let randomIndex
    // While there remain elements to shuffle.

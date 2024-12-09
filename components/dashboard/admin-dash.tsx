@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import { Activity, Bell, Menu, Moon, Settings, Sun, Users } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Users, Activity, Bell, Settings, Menu, Sun, Moon } from "lucide-react";
+import React, { useState } from "react";
 
 const App: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);

@@ -57,7 +57,7 @@ export default function MyForm() {
         throw new Error("Invalid credentials");
       }
 
-      const data = await response.json();
+      // const data = await response.json();
       // document.cookie = `token=${data.token}; path=/; HttpOnly;`;
       toast.success("Login successful!");
 

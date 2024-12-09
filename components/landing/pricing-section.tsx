@@ -82,13 +82,71 @@ export default function PricingSection() {
    const [interval, setInterval] = useState<Interval>('month')
    const [isLoading, setIsLoading] = useState(false)
    const [id, setId] = useState<string | null>(null)
+   const [price, setPrice] = useState<number | null>(null)
+   
 
-   const onSubscribeClick = async (priceId: string) => {
+   const onSubscribeClick = async (priceId: any) => {
+
       setIsLoading(true)
+      
       setId(priceId)
+      setPrice(priceId)
+      await handleRazorPay(priceId)
       await new Promise(resolve => setTimeout(resolve, 1000)) // Simulate a delay
       setIsLoading(false)
    }
+
+
+   const handleRazorPay = async (price: number) => {
+      const res = await initializeRazorpay();
+      if (!res) {
+        alert("Razorpay SDK failed to load. Are you online?");
+        return;
+      }
+  
+      const options: any = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: price * 100, 
+        currency: "INR",
+        name: "Infinity SAAS",
+        description: "Infinity SAAS Payment Gateway",
+        image: "/images/logo.png",
+        handler: function (response: any) {
+          alert(`Payment Successful. Payment ID: ${response.razorpay_payment_id}`);
+        },
+        prefill: {
+          name: "Aryan Inguz",
+          email: "aryaninguz369@gmail.com",
+          contact: "9816328430",
+        },
+        notes: {
+          address: "Infinity SAAS Corporate Office",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+  
+      const paymentObject = new (window as any).Razorpay(options);
+      paymentObject.open();
+    };
+  
+    const initializeRazorpay = () => {
+      return new Promise((resolve) => {
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+  
+        script.onload = () => {
+          resolve(true);
+        };
+        script.onerror = () => {
+          resolve(false);
+        };
+  
+        document.body.appendChild(script);
+      });
+    };
+   
 
    return (
       <section id="pricing">
@@ -188,7 +246,9 @@ export default function PricingSection() {
                            'hover:ring-primary transform-gpu ring-offset-current transition-all duration-300 ease-out hover:ring-2 hover:ring-offset-2',
                         )}
                         disabled={isLoading}
-                        onClick={() => void onSubscribeClick(price.id)}
+                        onClick={
+                           () => void onSubscribeClick(price.monthlyPrice)
+                        }
                      >
                         <span className="absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 transform-gpu bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-96 dark:bg-black" />
                         {(!isLoading || (isLoading && id !== price.id)) && (
