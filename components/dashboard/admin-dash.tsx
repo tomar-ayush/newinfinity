@@ -16,9 +16,8 @@ const App: React.FC = () => {
       <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
         {/* Sidebar */}
         <div
-          className={`${
-            isSidebarOpen ? "w-64" : "w-16"
-          } bg-white dark:bg-gray-800 shadow-lg transition-all duration-300`}
+          className={`${isSidebarOpen ? "w-64" : "w-16"
+            } bg-white dark:bg-gray-800 shadow-lg transition-all duration-300`}
         >
           <div className="flex items-center justify-between px-4 py-3">
             <span
