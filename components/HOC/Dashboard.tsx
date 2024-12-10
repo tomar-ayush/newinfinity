@@ -4,7 +4,7 @@ import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utilss";
 import { IconBrandTabler, IconLogout, IconSettings } from "@tabler/icons-react";
-import { BotMessageSquareIcon } from "lucide-react";
+import { BotMessageSquareIcon, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -18,7 +18,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
       label: "Dashboard",
       href: "/services/dashboard",
       icon: (
-        <BotMessageSquareIcon className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+        <LayoutDashboard className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
     },
     {
@@ -37,7 +37,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
     },
     {
       label: "Settings",
-      href: "#",
+      href: "/services/profile",
       icon: (
         <IconSettings className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
@@ -68,14 +68,13 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
               ))}
             </div>
           </div>
-          {/* Profile */}
-          <SidebarLink
+          {/* Profile           <SidebarLink
             link={{
               label: "",
               href: "/services/profile",
               icon: <Profile />,
             }}
-          />
+          />*/}
         </SidebarBody>
       </Sidebar>
 

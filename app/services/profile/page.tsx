@@ -2,6 +2,7 @@
 
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import Dashboard from "@/components/HOC/Dashboard";
+import { ImageIcon, Eye, EyeOff } from "lucide-react";
 
 interface FormData {
   name: string;
@@ -78,11 +79,11 @@ function Page() {
 
   return (
     <Dashboard>
-      <div className="flex flex-col items-center py-12 px-4 sm:px-6 md:px-8">
+      <div className="flex flex-col items-center  px-4 sm:px-6 md:px-8">
         <h2 className="text-3xl font-semibold mb-8 text-white">Edit Profile</h2>
 
         {/* Edit Profile Card */}
-        <div className="w-full max-w-lg bg-black p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out max-h-[600px] overflow-y-auto scrollbar-hidden border-4">
+        <div className="w-full max-w-lg bg-neutral-800 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out max-h-[600px] overflow-y-auto scrollbar-hidden border-4">
           {successMessage && (
             <div className="mb-4 text-green-400">{successMessage}</div>
           )}
@@ -90,7 +91,7 @@ function Page() {
             <div className="flex flex-col items-center mb-6">
               {/* Profile Photo Section */}
               <div
-                className={`relative w-24 h-24 rounded-full border-4 border-white bg-gray-600 overflow-hidden cursor-pointer transition-all duration-300 ${
+                className={`relative w-24 h-24 rounded-full border-4  dark:bg-neutral-900 overflow-hidden cursor-pointer transition-all duration-300 ${
                   isPhotoEnlarged ? "w-32 h-32" : ""
                 }`}
                 onClick={() => setIsPhotoEnlarged(!isPhotoEnlarged)}
@@ -102,8 +103,8 @@ function Page() {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="flex items-center justify-center text-white text-2xl">
-                    <span className="font-bold">+</span>
+                  <div className="flex items-center justify-center  text-white text-2xl pt-8">
+                    <ImageIcon className="h-6 w-6" />
                   </div>
                 )}
               </div>
@@ -147,7 +148,7 @@ function Page() {
                 value={formData.name}
                 onChange={handleInputChange}
                 required
-                className="mt-2 w-full p-3 border border-white bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-white transition duration-200 ease-in-out"
+                className="mt-2 w-full p-3 border  dark:bg-neutral-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-white transition duration-200 ease-in-out"
               />
             </div>
 
@@ -166,31 +167,8 @@ function Page() {
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                className="mt-2 w-full p-3 border border-white bg-gray-700 text-white rounded-lg focus:outline-none focus:ring=2 focus:ring-white transition duration=200 ease-in-out"
+                className="mt-2 w-full p-3 border  dark:bg-neutral-900 text-white rounded-lg focus:outline-none focus:ring=2 focus:ring-white transition duration=200 ease-in-out"
               />
-            </div>
-
-            {/* Phone Section */}
-            <div className="mb-6">
-              <label
-                htmlFor="phone"
-                className="block text-lg font-medium text-white"
-              >
-                Phone Number:
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-                required
-                pattern="[0-9]{10}"
-                placeholder="Enter 10-digit mobile number"
-                maxLength={10}
-                className="mt-2 w-full p-3 border border-white bg-gray-700 text-white rounded-lg focus:outline-none focus:ring=2 focus:ring-white transition duration=200 ease-in-out"
-              />
-              <small className="text-gray-400">Format: 1234567890</small>
             </div>
 
             {/* Current Password Section */}
@@ -210,7 +188,7 @@ function Page() {
                   onChange={handleInputChange}
                   required
                   minLength={8}
-                  className="mt-2 w-full p-3 border border-white bg-gray-700 text-white rounded-lg focus:outline-none focus:ring=2 focus:ring-white transition duration=200 ease-in-out"
+                  className="mt-2 w-full p-3 border  dark:bg-neutral-900 text-white rounded-lg focus:outline-none focus:ring=2 focus:ring-white transition duration=200 ease-in-out"
                 />
                 <button
                   type="button"
@@ -222,7 +200,11 @@ function Page() {
                     showCurrentPassword ? "Hide password" : "Show password"
                   }
                 >
-                  {showCurrentPassword ? "🙈" : "👁️"}
+                  {showCurrentPassword ? (
+                    <EyeOff className="h-5 w-5" />
+                  ) : (
+                    <Eye className="h-5 w-5" />
+                  )}
                 </button>
               </div>
               {/* Verification Button */}
@@ -257,19 +239,25 @@ function Page() {
                       onChange={handleInputChange}
                       required
                       minLength={8}
-                      className="mt-2 w-full p-3 border border-white bg-gray-700 text-white rounded-lg focus:outline-none focus:ring=2 focus:ring-white transition duration=200 ease-in-out"
+                      className="mt-2 w-full p-3 border dark:bg-neutral-900 text-white rounded-lg focus:outline-none focus:ring=2 focus:ring-white transition duration=200 ease-in-out"
                     />
                     <button
                       type="button"
-                      onClick={() => setShowNewPassword(!showNewPassword)}
+                      onClick={() =>
+                        setShowCurrentPassword(!showCurrentPassword)
+                      }
                       className={`absolute right-[10px] top-[50%] transform -translate-y-[50%] ${
-                        showNewPassword ? "text-blue-500" : "text-gray-500"
+                        showCurrentPassword ? "text-blue-500" : "text-gray-500"
                       }`}
                       aria-label={
-                        showNewPassword ? "Hide password" : "Show password"
+                        showCurrentPassword ? "Hide password" : "Show password"
                       }
                     >
-                      {showNewPassword ? "🙈" : "👁️"}
+                      {showCurrentPassword ? (
+                        <EyeOff className="h-5 w-5" />
+                      ) : (
+                        <Eye className="h-5 w-5" />
+                      )}
                     </button>
                   </div>
                 </div>
@@ -291,21 +279,25 @@ function Page() {
                       onChange={handleInputChange}
                       required
                       minLength={8}
-                      className="mt-2 w-full p-3 border border-white bg-gray-700 text-white rounded-lg focus:outline-none focus:ring=2 focus:ring-white transition duration=200 ease-in-out"
+                      className="mt-2 w-full p-3 border  dark:bg-neutral-900 text-white rounded-lg focus:outline-none focus:ring=2 focus:ring-white transition duration=200 ease-in-out"
                     />
                     <button
                       type="button"
                       onClick={() =>
-                        setShowConfirmPassword(!showConfirmPassword)
+                        setShowCurrentPassword(!showCurrentPassword)
                       }
                       className={`absolute right-[10px] top-[50%] transform -translate-y-[50%] ${
-                        showConfirmPassword ? "text-blue-500" : "text-gray-500"
+                        showCurrentPassword ? "text-blue-500" : "text-gray-500"
                       }`}
                       aria-label={
-                        showConfirmPassword ? "Hide password" : "Show password"
+                        showCurrentPassword ? "Hide password" : "Show password"
                       }
                     >
-                      {showConfirmPassword ? "🙈" : "👁️"}
+                      {showCurrentPassword ? (
+                        <EyeOff className="h-5 w-5" />
+                      ) : (
+                        <Eye className="h-5 w-5" />
+                      )}
                     </button>
                   </div>
                 </div>
@@ -316,9 +308,9 @@ function Page() {
             <button
               type="submit"
               disabled={isSubmitting || !isVerified}
-              className={`w-full py-3 px-6 rounded-lg text-white font-semibold ${
+              className={`w-full py-3 px-6 rounded-lg text-black font-semibold ${
                 isSubmitting || !isVerified
-                  ? "bg-gray-500 cursor-not-allowed"
+                  ? "bg-white cursor-not-allowed"
                   : "bg-blue-600 hover:bg-blue-700"
               }`}
             >
