@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useMemo, useEffect, useCallback } from "react";
 import { Search, User, LogOut } from "lucide-react";
+import { toast } from "sonner"
 
 // Define TypeScript interface for User
 interface User {
@@ -50,7 +51,6 @@ export default function UsersPage() {
       }
 
       const data: User[] = await response.json();
-      console.log("The promise is " + data);
       setUsers(data);
       setError(null);
     } catch (error) {
@@ -86,15 +86,82 @@ export default function UsersPage() {
   };
 
   // Handle Logout
-  const handleLogout = (userId: string) => {
-    setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
+  const handleLogout = async (userId: string) => {
+    try {
+      console.log("the function was clicked ", userId)
+      const userIdJson = {
+        _id: userId,
+      }
+      const response = await fetch("http://localhost:3000/api/user/deleteUser", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userIdJson)
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to Delete User")
+      }
+
+      setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
+    } catch (error) {
+      console.error("Error is deleting User", error);
+    }
+
+
+
   };
 
   // Handle Update User
   const handleUpdateUser = () => {
-    console.log("Updated user:", selectedUser);
+    {/* console.log("Updated user:", selectedUser); */ }
     setShowPopup(false);
   };
+
+
+  const updateUserDetails = async () => {
+    if (!selectedUser) return;
+
+    const userDetails = {
+      _id: selectedUser._id,
+      name: selectedUser.name,
+      email: selectedUser.email,
+      role: selectedUser.role,
+      status: selectedUser.status,
+      password: selectedUser.password || undefined,
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/api/user/updateUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userDetails),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update user details");
+      }
+
+      toast.success('User Updated', {
+        description: "The user details of the user are updated",
+      })
+
+      const updatedUser = await response.json();
+      setUsers((prevUsers) =>
+        prevUsers.map((user) => (user._id === updatedUser._id ? updatedUser : user))
+      );
+      setShowPopup(false);
+      setError(null);
+    } catch (error) {
+      console.error("Error updating user:", error);
+      setError(error instanceof Error ? error.message : "An unknown error occurred");
+    }
+  };
+
+
 
   return (
     <div className="bg-white shadow rounded-lg p-6">
@@ -154,11 +221,10 @@ export default function UsersPage() {
                 <td className="py-2 text-black">{user.role}</td>
                 <td className="py-2">
                   <span
-                    className={`px-2 py-1 rounded text-xs ${
-                      user.status === "Active"
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
-                    }`}
+                    className={`px-2 py-1 rounded text-xs ${user.status === "Active"
+                      ? "bg-green-100 text-green-800"
+                      : "bg-red-100 text-red-800"
+                      }`}
                   >
                     {user.status}
                   </span>
@@ -284,8 +350,7 @@ export default function UsersPage() {
               <button
                 onClick={() => {
                   // Logic to update user can be added here
-                  console.log("Updated user:", selectedUser);
-                  setShowPopup(false);
+                  updateUserDetails()
                 }}
                 className="bg-blue-500 text-white px-4 py-[10px] rounded hover:bg-blue-600 transition"
               >
