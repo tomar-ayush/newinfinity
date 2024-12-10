@@ -191,9 +191,9 @@ export default function UsersPage() {
             <Search className="absolute left-2 top-2 text-gray-400" size={20} />
           </div>
 
-          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-            Add New User
-          </button>
+          {/* <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"> */}
+          {/*   Add New User */}
+          {/* </button> */}
         </div>
       </div>
 
