@@ -61,7 +61,7 @@ export async function middleware(req: NextRequest) {
 
     // Protect Admin routes
     if (pathname.startsWith("/admin")) {
-      if (userRole !== "Admin") {
+      if (userRole !== "admin") {
         console.log("Unauthorized: Not an admin");
         return NextResponse.redirect(new URL("/403", req.url)); // Redirect non-admin users
       }
@@ -69,7 +69,7 @@ export async function middleware(req: NextRequest) {
 
     // Protect User routes (both User and Admin can access)
     if (pathname.startsWith("/services")) {
-      if (!["User", "Admin"].includes(userRole)) {
+      if (!["user", "admin"].includes(userRole)) {
         console.log("Unauthorized: Not a valid user");
         return NextResponse.redirect(new URL("/403", req.url)); // Redirect non-users
       }
