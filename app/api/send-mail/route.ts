@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
             Subject: ${title} | Description: ${metaDescription}
           `;
         } catch (error) {
-          console.warn(`Failed to scrape website for domain ${domain}: ${error.message}`);
+          console.warn(`Failed to scrape website for domain ${domain}: ${error}`);
           prompt = `
             Write a professional cold email on behalf of ${campaignInfo.founder} from ${campaignInfo.name}, 
             a company in the ${campaignInfo.industry} sector with website ${campaignInfo.website}, located in ${campaignInfo.location}. 
