@@ -55,10 +55,10 @@ const CRMDashboard: React.FC = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-50 dark:bg-gray-900 dark:text-gray-100 min-h-screen">
+    <div className="p-6 bg-gray-50 dark:bg-neutral-900  dark:text-gray-100 min-h-screen">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
         {/* Key Metrics Cards */}
-        <div className="bg-white shadow rounded-lg dark:bg-gray-800 dark:text-gray-100">
+        <div className="bg-white shadow rounded-lg dark:bg-neutral-800 dark:text-gray-100">
           <div className="flex items-center justify-between p-6">
             <div>
               <h3 className="text-sm text-gray-500 dark:text-gray-400">
@@ -70,7 +70,7 @@ const CRMDashboard: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white shadow rounded-lg dark:bg-gray-800 dark:text-gray-100">
+        <div className="bg-white shadow rounded-lg dark:bg-neutral-800 dark:text-gray-100">
           <div className="flex items-center justify-between p-6">
             <div>
               <h3 className="text-sm text-gray-500 dark:text-gray-400">
@@ -85,7 +85,7 @@ const CRMDashboard: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white shadow rounded-lg dark:bg-gray-800 dark:text-gray-100">
+        <div className="bg-white shadow rounded-lg dark:bg-neutral-800 dark:text-gray-100">
           <div className="flex items-center justify-between p-6">
             <div>
               <h3 className="text-sm text-gray-500 dark:text-gray-400">
@@ -100,7 +100,7 @@ const CRMDashboard: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white shadow rounded-lg dark:bg-gray-800 dark:text-gray-100">
+        <div className="bg-white shadow rounded-lg dark:bg-neutral-800 dark:text-gray-100">
           <div className="flex items-center justify-between p-6">
             <div>
               <h3 className="text-sm text-gray-500 dark:text-gray-400">
@@ -114,7 +114,7 @@ const CRMDashboard: React.FC = () => {
       </div>
 
       {/* Custom Tab Navigation */}
-      <div className="flex mb-6 bg-white rounded-lg shadow dark:bg-gray-800">
+      <div className="flex mb-6 bg-white rounded-lg shadow dark:bg-neutral-800">
         {["overview", "leads", "campaigns"].map((tab) => (
           <button
             key={tab}
@@ -135,7 +135,7 @@ const CRMDashboard: React.FC = () => {
       {currentTab === "overview" && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Sales Performance Chart */}
-          <div className="bg-white shadow rounded-lg dark:bg-gray-800 dark:text-gray-100">
+          <div className="bg-white shadow rounded-lg dark:bg-neutral-800 dark:text-gray-100">
             <div className="p-6">
               <h2 className="text-xl font-semibold mb-4">Sales Performance</h2>
               <ResponsiveContainer width="100%" height={300}>
@@ -161,7 +161,7 @@ const CRMDashboard: React.FC = () => {
           </div>
 
           {/* Potential Clients Table */}
-          <div className="bg-white shadow rounded-lg dark:bg-gray-800 dark:text-gray-100">
+          <div className="bg-white shadow rounded-lg dark:bg-neutral-800 dark:text-gray-100">
             <div className="p-6">
               <h2 className="text-xl font-semibold mb-4">
                 Top Potential Clients
@@ -193,7 +193,7 @@ const CRMDashboard: React.FC = () => {
       )}
 
       {currentTab === "leads" && (
-        <div className="bg-white shadow rounded-lg p-6 dark:bg-gray-800 dark:text-gray-100">
+        <div className="bg-white shadow rounded-lg p-6 dark:bg-neutral-800 dark:text-gray-100">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">
               Potential Leads Management
@@ -213,7 +213,7 @@ const CRMDashboard: React.FC = () => {
       )}
 
       {currentTab === "campaigns" && (
-        <div className="bg-white shadow rounded-lg p-6 dark:bg-gray-800 dark:text-gray-100">
+        <div className="bg-white shadow rounded-lg p-6 dark:bg-neutral-800 dark:text-gray-100">
           <h2 className="text-xl font-semibold mb-4">
             Email Campaign Insights
           </h2>
