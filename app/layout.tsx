@@ -5,6 +5,7 @@ import { ny } from '../lib/utils'
 import '../app/styles/globals.css'
 import { EmailsContextProvider } from '@/context/emailsContext'
 import ChatbotLayout from '@/components/chatbot/chatbot-layout'
+import { ThemeProvider } from '@/components/theme-provider'
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -30,8 +31,14 @@ export default function RootLayout({
         )}
       >
         <ChatbotLayout>
-          <EmailsContextProvider>{children}</EmailsContextProvider>
-          <Toaster />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            disableTransitionOnChange
+          >
+            <EmailsContextProvider>{children}</EmailsContextProvider>
+            <Toaster />
+          </ThemeProvider>
         </ChatbotLayout>
       </body>
     </html>

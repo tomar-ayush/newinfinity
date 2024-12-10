@@ -80,7 +80,7 @@ export default function HeroSection() {
         </span>
       </motion.h1>
 
-      <div className="flex flex-col items-center justify-center px-8 mt-12 space-y-5 sm:space-y-0 sm:px-0 sm:space-x-5 sm:flex-row">
+      <div className="flex flex-col items-center justify-center px-8 mt-12 space-y-5 sm:space-y-0 sm:space-x-5 sm:flex-row">
         <motion.div
           className="relative inline-flex items-center justify-center w-full sm:w-auto group"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -97,18 +97,21 @@ export default function HeroSection() {
           </a>
         </motion.div>
 
-        <motion.a
-          href="mailto:team@thexitingway.com"
-          className="inline-flex items-center justify-center w-full px-8 py-3 text-base font-normal text-theme-button-text transition-all duration-200 bg-theme-button-bg border border-gray-600 rounded-full sm:w-auto hover:border-theme-hover-border"
-          role="button"
+        <motion.div
+          className="inline-flex items-center justify-center w-full sm:w-auto"
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2, duration: 1 }}
         >
-          Talk to our team
-        </motion.a>
+          <a
+            href="mailto:team@thexitingway.com"
+            className="inline-flex items-center justify-center w-full px-8 py-3 text-base font-normal text-theme-button-text transition-all duration-200 bg-theme-button-bg border border-gray-600 rounded-full sm:w-auto hover:border-theme-hover-border"
+            role="button"
+          >
+            Talk to our team
+          </a>
+        </motion.div>
       </div>
-
       <div
         ref={ref}
         className="animate-fade-up relative mt-32 opacity-0 [--animation-delay:400ms] [perspective:2000px] after:absolute after:inset-0 after:z-50 after:[background:linear-gradient(to_top,hsl(var(--background))_30%,transparent)]"
