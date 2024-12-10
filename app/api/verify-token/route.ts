@@ -14,10 +14,10 @@ export async function GET(request: NextRequest) {
 
   try {
     // Verify the token using the same method as in middleware
-    await jwtVerify(token, JWT_SECRET)
-    
+    const decoded = await jwtVerify(token, JWT_SECRET)
+
     // Token is valid
-    return NextResponse.json({ isValid: true }, { status: 200 })
+    return NextResponse.json({ isValid: true, userId: decoded.payload.userId }, { status: 200 })
   } catch (error) {
     // Token verification failed
     console.error('Token verification error:', error)

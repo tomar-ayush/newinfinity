@@ -40,9 +40,15 @@ function Page() {
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
+    if (name === "name" && /\d/.test(value)) {
+      alert("Name cannot contain numbers.");
+      return;
+    }
+
     setFormData((prevData) => ({ ...prevData, [name]: value }));
     if (name === "currentPassword") {
-      setVerificationError(""); // Clear error on input change
+      setVerificationError("");
     }
   };
 
@@ -91,9 +97,8 @@ function Page() {
             <div className="flex flex-col items-center mb-6">
               {/* Profile Photo Section */}
               <div
-                className={`relative w-24 h-24 rounded-full border-4  dark:bg-neutral-900 overflow-hidden cursor-pointer transition-all duration-300 ${
-                  isPhotoEnlarged ? "w-32 h-32" : ""
-                }`}
+                className={`relative w-24 h-24 rounded-full border-4  dark:bg-neutral-900 overflow-hidden cursor-pointer transition-all duration-300 ${isPhotoEnlarged ? "w-32 h-32" : ""
+                  }`}
                 onClick={() => setIsPhotoEnlarged(!isPhotoEnlarged)}
               >
                 {formData.profilePhoto ? (
@@ -193,9 +198,8 @@ function Page() {
                 <button
                   type="button"
                   onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                  className={`absolute right-[10px] top-[50%] transform -translate-y-[50%] ${
-                    showCurrentPassword ? "text-blue-500" : "text-gray-500"
-                  }`}
+                  className={`absolute right-[10px] top-[50%] transform -translate-y-[50%] ${showCurrentPassword ? "text-blue-500" : "text-gray-500"
+                    }`}
                   aria-label={
                     showCurrentPassword ? "Hide password" : "Show password"
                   }
@@ -246,9 +250,8 @@ function Page() {
                       onClick={() =>
                         setShowCurrentPassword(!showCurrentPassword)
                       }
-                      className={`absolute right-[10px] top-[50%] transform -translate-y-[50%] ${
-                        showCurrentPassword ? "text-blue-500" : "text-gray-500"
-                      }`}
+                      className={`absolute right-[10px] top-[50%] transform -translate-y-[50%] ${showCurrentPassword ? "text-blue-500" : "text-gray-500"
+                        }`}
                       aria-label={
                         showCurrentPassword ? "Hide password" : "Show password"
                       }
@@ -286,9 +289,8 @@ function Page() {
                       onClick={() =>
                         setShowCurrentPassword(!showCurrentPassword)
                       }
-                      className={`absolute right-[10px] top-[50%] transform -translate-y-[50%] ${
-                        showCurrentPassword ? "text-blue-500" : "text-gray-500"
-                      }`}
+                      className={`absolute right-[10px] top-[50%] transform -translate-y-[50%] ${showCurrentPassword ? "text-blue-500" : "text-gray-500"
+                        }`}
                       aria-label={
                         showCurrentPassword ? "Hide password" : "Show password"
                       }
@@ -308,11 +310,10 @@ function Page() {
             <button
               type="submit"
               disabled={isSubmitting || !isVerified}
-              className={`w-full py-3 px-6 rounded-lg text-black font-semibold ${
-                isSubmitting || !isVerified
-                  ? "bg-white cursor-not-allowed"
-                  : "bg-blue-600 hover:bg-blue-700"
-              }`}
+              className={`w-full py-3 px-6 rounded-lg text-black font-semibold ${isSubmitting || !isVerified
+                ? "bg-white cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700"
+                }`}
             >
               {isSubmitting ? "Updating..." : "Save Changes"}
             </button>
