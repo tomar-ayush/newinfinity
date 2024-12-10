@@ -38,6 +38,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
     {
       label: "Settings",
       href: "/services/profile",
+      href: "/services/profile",
       icon: (
         <IconSettings className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
