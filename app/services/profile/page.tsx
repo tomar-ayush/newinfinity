@@ -151,10 +151,24 @@ function Page() {
                 id="name"
                 name="name"
                 value={formData.name}
-                onChange={handleInputChange}
+                onChange={(e) => {
+                  const regex = /^[A-Za-z\s]*$/; // Allows only letters and spaces
+                  if (regex.test(e.target.value)) {
+                    handleInputChange(e); // Update state only if valid
+                  }
+                }}
                 required
-                className="mt-2 w-full p-3 border  dark:bg-neutral-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-white transition duration-200 ease-in-out"
+                placeholder="Enter your name"
+                className="mt-2 w-full p-3 border bg-neutral-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out"
+                style={{
+                  textTransform: "capitalize", // Ensures the first letter of each word is capitalized
+                  letterSpacing: "0.05em",
+                  fontFamily: "'Roboto', sans-serif", // Material Design font
+                }}
               />
+              <small className="text-sm text-gray-400">
+                Only letters and spaces are allowed.
+              </small>
             </div>
 
             {/* Email Section */}
@@ -172,7 +186,7 @@ function Page() {
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                className="mt-2 w-full p-3 border  dark:bg-neutral-900 text-white rounded-lg focus:outline-none focus:ring=2 focus:ring-white transition duration=200 ease-in-out"
+                className="mt-2 w-full p-3 border  dark:bg-neutral-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration=200 ease-in-out"
               />
             </div>
 
@@ -193,7 +207,7 @@ function Page() {
                   onChange={handleInputChange}
                   required
                   minLength={8}
-                  className="mt-2 w-full p-3 border  dark:bg-neutral-900 text-white rounded-lg focus:outline-none focus:ring=2 focus:ring-white transition duration=200 ease-in-out"
+                  className="mt-2 w-full p-3 border  dark:bg-neutral-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration=200 ease-in-out"
                 />
                 <button
                   type="button"
@@ -243,7 +257,7 @@ function Page() {
                       onChange={handleInputChange}
                       required
                       minLength={8}
-                      className="mt-2 w-full p-3 border dark:bg-neutral-900 text-white rounded-lg focus:outline-none focus:ring=2 focus:ring-white transition duration=200 ease-in-out"
+                      className="mt-2 w-full p-3 border dark:bg-neutral-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration=200 ease-in-out"
                     />
                     <button
                       type="button"
@@ -282,7 +296,7 @@ function Page() {
                       onChange={handleInputChange}
                       required
                       minLength={8}
-                      className="mt-2 w-full p-3 border  dark:bg-neutral-900 text-white rounded-lg focus:outline-none focus:ring=2 focus:ring-white transition duration=200 ease-in-out"
+                      className="mt-2 w-full p-3 border  dark:bg-neutral-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration=200 ease-in-out"
                     />
                     <button
                       type="button"
